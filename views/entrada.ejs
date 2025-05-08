@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrar Entrada</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <h2>Registrar Entrada de Vehículo</h2>
+  <form action="/vehiculos/entrada" method="POST">
+    <label for="placa">Placa:</label>
+    <input type="text" id="placa" name="placa" placeholder="ABC1234" required>
+    <button type="submit">Registrar</button>
+  </form>
+  <p>
+    <a href="<%= rol === 'admin' ? '/vehiculos/admin' : '/vehiculos/trabajador' %>">
+      ← Volver al panel
+    </a>
+  </p>
+</body>
+</html>

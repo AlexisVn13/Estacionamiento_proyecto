@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel del Administrador</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+  <h1>Bienvenido, <%= usuario %> (Administrador)</h1>
+  <a href="/vehiculos/entrada">Registrar entrada</a> |
+  <a href="/auth/logout">Cerrar sesión</a>
+
+  <h2>Vehículos</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Placa</th>
+        <th>Hora Entrada</th>
+        <th>Hora Salida</th>
+        <th>Registrado por</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% vehiculos.forEach(v => { %>
+        <tr>
+          <td><%= v.placa %></td>
+          <td><%= new Date(v.hora_entrada).toLocaleString() %></td>
+          <td>
+            <%= v.hora_salida
+                 ? new Date(v.hora_salida).toLocaleString()
+                 : '—' %>
+          </td>
+          <td><%= v.registrado_por || '—' %></td>
+          <td>
+            <% if (!v.hora_salida) { %>
+              <form action="/vehiculos/salida/<%= v.id %>" method="POST" style="display:inline;">
+                <button type="submit">Registrar salida</button>
+              </form>
+            <% } else { %>
+              Finalizado
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <h2>Tickets</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Placa</th>
+        <th>Total</th>
+        <th>Pagado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% tickets.forEach(t => { %>
+        <tr>
+          <td><%= t.placa %></td>
+          <td>
+            $
+            <%= t.total
+                 ? Number(t.total).toFixed(2)
+                 : '0.00' %>
+          </td>
+          <td><%= t.pagado ? 'Sí' : 'No' %></td>
+          <td>
+            <% if (!t.pagado) { %>
+              <form action="/vehiculos/ticket/pagar/<%= t.id %>" method="POST">
+                <button type="submit">Pagar</button>
+              </form>
+            <% } else { %>
+              —
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>

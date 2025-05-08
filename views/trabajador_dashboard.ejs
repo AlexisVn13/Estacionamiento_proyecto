@@ -1,0 +1,27 @@
+<!-- views/trabajador_dashboard.ejs -->
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><title>Trabajador</title></head>
+<body>
+  <h1>Trabajador: <%= usuario %></h1>
+  <a href="/auth/logout">Cerrar sesión</a>
+
+  <h2>Registrar Entrada</h2>
+  <form action="/vehiculos/entrada" method="POST">
+    <input name="placa" placeholder="Placa" required>
+    <button>Registrar</button>
+  </form>
+
+  <h2>Mis Vehículos</h2>
+  <table border="1">
+    <tr><th>Placa</th><th>Entrada</th><th>Salida</th></tr>
+    <% vehiculos.forEach(v=>{ %>
+    <tr>
+      <td><%= v.placa %></td>
+      <td><%= new Date(v.hora_entrada).toLocaleString() %></td>
+      <td><%= v.hora_salida? new Date(v.hora_salida).toLocaleString() : '—' %></td>
+    </tr>
+    <% }) %>
+  </table>
+</body>
+</html>

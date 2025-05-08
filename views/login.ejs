@@ -1,0 +1,14 @@
+<!-- views/login.ejs -->
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><title>Login</title></head>
+<body>
+  <h2>Iniciar Sesión</h2>
+  <% if (error) { %><p style="color:red;"><%= error %></p><% } %>
+  <form action="/auth/login" method="POST">
+    <input name="usuario" placeholder="Usuario" required>
+    <input name="contraseña" type="password" placeholder="Contraseña" required>
+    <button>Entrar</button>
+  </form>
+</body>
+</html>
