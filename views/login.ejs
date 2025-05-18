@@ -1,16 +1,37 @@
 <!-- views/login.ejs -->
 <!DOCTYPE html>
 <html lang="es">
-<head><meta charset="UTF-8"><title>Login</title></head>
+<head>
+  <meta charset="UTF-8">
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="/js/css/estilos.css">
+</head>
 <body>
-  <h1> Registro de vehiculos </h1>
-  <h2> BIENVENIDO </h2>
-  <h3>Iniciar Sesión</h3>
-  <% if (error) { %><p style="color:red;"><%= error %></p><% } %>
-  <form action="/auth/login" method="POST">
-    <input name="usuario" placeholder="Usuario" required>
-    <input name="contraseña" type="password" placeholder="Contraseña" required>
-    <button>Entrar</button>
-  </form>
+  <div class="login-box">
+    <h2>Login</h2>
+
+    <% if (error) { %>
+      <p style="color:red;"><%= error %></p>
+    <% } %>
+
+    <form action="/auth/login" method="POST">
+      <div class="user-box">
+        <input name="usuario" type="text" required>
+        <label>Username</label>
+      </div>
+      <div class="user-box">
+        <input name="contraseña" type="password" required>
+        <label>Password</label>
+      </div>
+
+      <button type="submit" class="submit-button">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        INGRESAR
+      </button>
+    </form>
+  </div>
 </body>
 </html>
